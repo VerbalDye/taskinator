@@ -117,7 +117,7 @@ var createTaskActions = function (taskId) {
     statusSelectEl.setAttribute("name", "status-change");
     statusSelectEl.setAttribute("data-task-id", taskId);
 
-    var statusChoices = ["To Do", "In Progress", "Completed"];
+    var statusChoices = ["To do", "In progress", "Completed"];
 
     for (var i = 0; i < statusChoices.length; i++) {
         //create option element
@@ -192,7 +192,7 @@ var taskStatusChangeHandler = function (event) {
     var taskId = event.target.getAttribute("data-task-id");
 
     //get the currently selected option's value and convert to lowercase
-    var statusValue = event.target.value.toLowerCase();
+    var statusValue = event.target.value;
 
     // find the parent task item element based on the id
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
@@ -251,6 +251,11 @@ var loadTasks = function () {
         else if (statusValue === "completed") {
             tasksCompletedEl.appendChild(listItemEl);
         };
+
+        var taskSelected = document.querySelector(".task-item[data-task-id='" + tasks[i].id + "']");
+        var statusEl = taskSelected.querySelector("option[value='" + statusValue + "']");
+        console.log(statusEl);
+        statusEl.selected = "selected";
     };
     taskIdCounter = tasks[tasks.length-1].id + 1;
 };
